@@ -1,0 +1,447 @@
+//
+//  PrefixHeader.pch
+//  MMBaseMoudle
+//
+//  Created by 张明 on 2018/4/25.
+//  Copyright © 2018年 MM. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "HHMainHeaderFile.h"
+
+#define DEMO_CALL 1
+
+#define URL(urlString) [NSURL URLWithString:urlString]
+#define IMGURL(v) URL([HYURL_IMG stringByAppendingString:v])
+
+#define mainColor RGBA(83, 40, 240, 1)
+// 日志输出
+#ifdef DEBUG
+#define HHLog(...) NSLog(__VA_ARGS__)
+#else
+#define HHLog(...)
+#endif
+// 窗口
+#define  kHHKeyWindow [[UIApplication sharedApplication] keyWindow]
+/**********************************FM***********************************/
+// 消息通知
+#define RegisterNotify(_name, _selector)                    \
+[[NSNotificationCenter defaultCenter] addObserver:self  \
+selector:_selector name:_name object:nil];
+
+#define RemoveNofify            \
+[[NSNotificationCenter defaultCenter] removeObserver:self];
+
+#define SendNotify(_name, _object)  \
+[[NSNotificationCenter defaultCenter] postNotificationName:_name object:_object];
+#define SONGPLAYSTATUSCHANGE @"SongPlayStatusChange"
+#define PLAYMODECHANGE @"On/OffLineSongPlay"
+#define REFRESHSONGLIST @"RefreshSongList"
+/**********************************FM***********************************/
+//随机色
+#define RandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+/**  R G B A */
+#define RGBA(R/*红*/, G/*绿*/, B/*蓝*/, A/*透明*/) [UIColor colorWithRed:R/255.f green:G/255.f blue:B/255.f alpha:A]
+/*判断str是否为空*/
+#define NULLSTR(str) ([str isKindOfClass:[NSNull class]]||(str == nil)||[str isEqualToString:@"<null>"]||[str isEqualToString:@"(null)"]||[str isEqualToString:@""])
+#define  HYimageString(a) [NSURL URLWithString:a]
+
+
+
+//当前时间通知的名字
+#define CurrentTime @"getcurrentTime"
+#define PlaceholdImg [UIImage imageNamed:@"zhanweitu"]
+#define kScreenW [UIScreen mainScreen].bounds.size.width
+#define kScreenH [UIScreen mainScreen].bounds.size.height
+
+#define HHTopViewH 44
+
+#define kMargin 10
+
+#define kNavgationH 44.0
+#define kStatusBarH 20.0
+#define kNavigationBarH 64
+#define kTabBarH 49.0
+
+#define kNavigationBarColor RGBA(38, 30, 57, 1) //RGBA(51, 42, 74, 1.f)
+//UIColorFromRGB(0x252954)//
+#define kTabBarBgColor RGBA(10, 27, 53, 1)
+#define kTableViewBgColor RGBA(245, 245, 245, 1)
+#define kMainSelectColor RGBA(106, 82, 240, 1)
+
+#define ClassWeak(weakClass) __weak typeof(self) weakClass = self
+
+
+#define kIPHONE5W 320.0
+#define kIPHONE5H 568.0
+
+#define kScaleW kScreenW / kIPHONE5W
+#define kScaleH kScreenH / kIPHONE5H
+
+//宽比
+#define DEVEWidth  375.000000
+#define Screen_Height     CGRectGetHeight([[UIScreen mainScreen] bounds])
+#define Screen_Width      CGRectGetWidth([[UIScreen mainScreen] bounds])
+#define SLUIDeviceWidth  ((Screen_Width)/(DEVEWidth))
+
+
+#define kScaleX(x) x * kScaleW
+#define kScaleY(y) y * kScaleH
+
+#define Font(size) [UIFont systemFontOfSize:size * kScaleW]
+
+#define HHCenter [NSNotificationCenter defaultCenter]
+
+#define MainBunlde [NSBundle mainBundle]
+
+//** 沙盒路径 ***********************************************************************************
+#define PATH_OF_APP_HOME    NSHomeDirectory()
+#define PATH_OF_TEMP        NSTemporaryDirectory()
+#define PATH_OF_DOCUMENT   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+
+/* *************************输出控制 Release Debug*************************/
+//#ifdef DEBUG
+//
+//#define NSLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
+//#else
+//#define NSLog(format, ...)
+//
+//#endif
+
+/** DEBUG RELEASE **/
+#ifdef DEBUG
+
+#define DLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
+#else
+#define DLog(format, ...)
+
+#endif
+
+#define MCRelease(x)            x = nil
+/* ****************************************************************************************************************** */
+#pragma mark - Frame (宏 x, y, width, height)
+
+// App Frame
+#define Application_Frame       [[UIScreen mainScreen] applicationFrame]
+
+// App Frame Height&Width
+#define App_Frame_Height        [[UIScreen mainScreen] applicationFrame].size.height
+#define App_Frame_Width         [[UIScreen mainScreen] applicationFrame].size.width
+
+// MainScreen Height&Width
+#define Main_Screen_Height      [[UIScreen mainScreen] bounds].size.height
+#define Main_Screen_Width       [[UIScreen mainScreen] bounds].size.width
+
+// View 坐标(x,y)和宽高(width,height)
+#define X(v)                    (v).frame.origin.x
+#define Y(v)                    (v).frame.origin.y
+#define WIDTH(v)                (v).frame.size.width
+#define HEIGHT(v)               (v).frame.size.height
+#define BWIDTH(v)               (v).bounds.size.width
+#define BHEIGHT(v)              (v).bounds.size.height
+
+#define IMAGEWIDTH(v)           (v).size.width
+#define IMAGEHEIGHT(v)          (v).size.height
+
+#define MinX(v)                 CGRectGetMinX((v).frame)
+#define MinY(v)                 CGRectGetMinY((v).frame)
+
+#define MidX(v)                 CGRectGetMidX((v).frame)
+#define MidY(v)                 CGRectGetMidY((v).frame)
+
+#define MaxX(v)                 CGRectGetMaxX((v).frame)
+#define MaxY(v)                 CGRectGetMaxY((v).frame)
+
+//  ********************************************        ******************************************* //
+//#define USERGETINFOSAVE_DEFAULTS [NSUserDefaults standardUserDefaults]
+
+// 判断手机类型  ipad类型
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+// 是否高清屏
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH (Main_Screen_Width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define kDevice_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define SSystemVersion          ([[UIDevice currentDevice] systemVersion])
+#define NLSystemVersionGreaterOrEqualThan(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
+#define IOS7_OR_LATER NLSystemVersionGreaterOrEqualThan(7.0)
+#define IOS9_OR_LATER NLSystemVersionGreaterOrEqualThan(9.0)
+#define isIOS8 ([SSystemVersion floatValue] >= 8.0)
+#define isIOS11 ([SSystemVersion floatValue] >= 11.0)
+
+// 系统控件默认高度
+#define kStatusBarHeight        (20.f)
+#define kTopBarHeight           (44.f)
+#define kTopBarStuHeight (64.f)
+#define kBottomBarHeight        (49.f)
+#define kEffectiveViewHeight    (Main_Screen_Height-kTopBarStuHeight)
+#define kTabbarEffectiveViewHeight (kEffectiveViewHeight-kBottomBarHeight)
+#define STkPadding 10.f
+#define kDivx 12.f
+#define kEnglishKeyboardHeight  (216.f)
+#define kChineseKeyboardHeight  (252.f)
+#define kTCellHeight (IS_IPHONE_6P?52.f:kBottomBarHeight)
+// 当前版本
+//#define FSystemVersion          ([[[UIDevice currentDevice] systemVersion] floatValue])
+//#define DSystemVersion          ([[[UIDevice currentDevice] systemVersion] doubleValue])
+//应用程序的名字  和  版本
+#define AppDisplayName          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
+#define AppDisplayVersion       [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+
+// 当前语言 是否为中文
+#define IsChinese ([[[NSLocale preferredLanguages] firstObject] isEqualToString:(IOS9_OR_LATER?@"zh-Hans-CN":@"zh-Hans")]?YES:NO)
+/* ****************************************************************************************************************** */
+#pragma mark - Funtion Method (宏 方法)
+
+// PNG JPG 图片路径
+#define PNGPATH(NAME)           [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:NAME] ofType:@"png"]
+#define JPGPATH(NAME)           [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:NAME] ofType:@"jpg"]
+#define PATH(NAME, EXT)         [[NSBundle mainBundle] pathForResource:(NAME) ofType:(EXT)]
+
+// 加载图片
+#define PNGIMAGE(NAME)          [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:@"png"]]
+#define JPGIMAGE(NAME)          [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:@"jpg"]]
+#define IMAGE(NAME, EXT)        [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:(EXT)]]
+
+// 字体大小(常规/粗体)
+#define BOLDSYSTEMFONT(FONTSIZE)[UIFont boldSystemFontOfSize:FONTSIZE]
+#define SYSTEMFONT(FONTSIZE)    [UIFont systemFontOfSize:FONTSIZE]
+#define FONT(NAME, FONTSIZE)    [UIFont fontWithName:(NAME) size:(FONTSIZE)]
+#define SYSTEMFONT_10 [UIFont systemFontOfSize:10]
+#define SYSTEMFONT_12 [UIFont systemFontOfSize:12]
+#define BSYSTEMFONT_14 [UIFont boldSystemFontOfSize:14]  //  加粗
+#define SYSTEMFONT_14 [UIFont systemFontOfSize:14]  //
+#define SYSTEMFONT_16 [UIFont systemFontOfSize:16]
+#define SYSTEMFONT_15 [UIFont systemFontOfSize:15]
+#define SYSTEMFONT_17 [UIFont systemFontOfSize:17]
+#define SYSTEMFONT_20 [UIFont systemFontOfSize:20]
+#define BSYSTEMFONT_25 [UIFont boldSystemFontOfSize:25]  //  加粗
+
+// 颜色(RGB)
+#define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+//#define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+
+//富文本编辑 图片标识
+#define RICHTEXT_IMAGE (@"[UIImageView]")
+
+// RGB颜色转换（16进制->10进制）
+#define UIColorFromRGB(rgbValue)\
+\
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 \
+alpha:1.0]
+
+#define UIColorFromRGBA(rgbValue, a) \
+\
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 \
+alpha:a]
+
+//  app 整体色调 颜色值
+#define WholeColor UIColorFromRGB(0x31a5b2)//RGBCOLOR(38, 150, 135)////007a87//
+#define LightBlackColor UIColorFromRGB(0x444444) // 浅黑
+#define LightWhiteColor UIColorFromRGB(0xbbbbbb) //浅白
+#define GrayWholeColor RGBCOLOR(213, 213, 213)
+
+#define ViewBackColor  UIColorFromRGB(0xf8f8f9)  //RGBCOLOR(246, 245, 227)//
+#define lGrayTintColor UIColorFromRGB(0xededed)
+#define kLinkAttriColor UIColorFromRGB(0x36648b)
+#define LBlackTintColor UIColorFromRGB(0x484848)
+#define LVagueBackColor UIColorFromRGBA(0x474a7d, .1)
+
+#define LLOrangeColor UIColorFromRGB(0xfd641e)
+#define LGreenBlueColor UIColorFromRGB(0x4cc3bd)
+
+#define TranslucentColor [UIColor colorWithWhite:1.f alpha:.5]
+#define GlobalPlainColor [UIColor colorWithWhite:1.f alpha:.1]
+#define LContentBgColor [UIColor colorWithWhite:1.f alpha:.2]
+#define LFenGeBgColor [UIColor colorWithWhite:1.f alpha:.05]
+#define LOtherBgColor [UIColor colorWithWhite:.1 alpha:.15]
+
+// 全局色值
+//#define kGlobalColor RGBCOLOR(46, 47, 61)
+// 紫色
+#define kVioletColor UIColorFromRGB(0x950095)
+//    **********   夺宝   **********   //
+//  暗红色
+#define RedIconColor UIColorFromRGB(0xe4393c)   //
+// 重要文字信息提示
+#define DuoBaoBlackColor UIColorFromRGB(0x222222)
+// 用户普通段落
+#define LightBGrayColor UIColorFromRGB(0x666666)
+// 用户辅助  次要信息
+#define LightGrayColor UIColorFromRGB(0x999999) // 浅灰
+// 分割线 标签
+#define DuoBaoFGColor UIColorFromRGB(0xd7d7d7)
+// 用于内容区域 底色
+#define DuoBaoDiSeColor UIColorFromRGB(0xf3f5f7)
+// 分割 模块的 底色
+#define DuoBaoFenGeColor UIColorFromRGB(0xf8f8f8)
+// lanse 模块的 底色
+#define kDuoBaoBlueColor UIColorFromRGB(0x4676C7)
+
+//  商品图片的固定大小
+#define kCoverWH 70.f
+
+// View 圆角和加边框
+#define ViewBorderRadius(View, Radius, Width, Color)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES];\
+[View.layer setBorderWidth:(Width)];\
+[View.layer setBorderColor:[Color CGColor]]
+
+// View 圆角
+#define ViewRadius(View, Radius)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES]
+
+// 图形 缩放
+#define ViewAspect(View)\
+\
+View.contentMode = UIViewContentModeScaleAspectFill;\
+View.layer.masksToBounds = YES
+
+// View 阴影
+#define ViewBorderShadow(View, Radius, Width, Ity)\
+\
+[View.layer setShadowPath:[UIBezierPath bezierPathWithRect:View.bounds].CGPath];\
+[View setClipsToBounds:NO];\
+[View.layer setShadowColor:[[UIColor blackColor] CGColor]];\
+[View.layer setShadowOffset:CGSizeMake(0.f, Width)];\
+[View.layer setShadowOpacity:Ity];\
+[View.layer setShadowRadius:Radius]
+
+// View 阴影 无路径
+#define nViewBorderShadow(View, Radius, Width, Ity)\
+\
+[View setClipsToBounds:NO];\
+[View.layer setShadowColor:[[UIColor blackColor] CGColor]];\
+[View.layer setShadowOffset:CGSizeMake(0.f, Width)];\
+[View.layer setShadowOpacity:Ity];\
+[View.layer setShadowRadius:Radius]
+
+// **********   GCD 线程   延迟调用   **********   //
+#define Dispatch_AfterCall(time, method) \
+\
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{method;});
+
+// UIView - viewWithTag
+#define VIEWWITHTAG(_OBJECT, _TAG)\
+\
+[_OBJECT viewWithTag : _TAG]
+
+// 本地化字符串
+/** NSLocalizedString宏做的其实就是在当前bundle中查找资源文件名“Localizable.strings”(参数:键＋注释) */
+//  本地 国际化语言
+#define LocalizedTitle(v) NSLocalizedString(v, @"")
+/** NSLocalizedStringFromTable宏做的其实就是在当前bundle中查找资源文件名“xxx.strings”(参数:键＋文件名＋注释) */
+#define AppLocalString(x, ...)  NSLocalizedStringFromTable(x, @"someName", nil)
+
+#if TARGET_OS_IPHONE
+/** iPhone Device */
+#endif
+
+#if TARGET_IPHONE_SIMULATOR
+/** iPhone Simulator */
+#endif
+
+// ARC
+#if __has_feature(objc_arc)
+/** Compiling with ARC */
+#else
+/** Compiling without ARC */
+#endif
+
+//#define kAlert [[EncapsulatedAlertView alloc] init]
+#define NSStringFromInt(int)        [NSString stringWithFormat:@"%ld", (long)int]
+#define NSStringFromFloat(float)    [NSString stringWithFormat:@"%f", float]
+#define NSStringFromStr(str)        [NSString stringWithFormat:@"%@", str]
+
+//计算线条宽度函数
+#define LineWidth(CGFloat) CGFloat / [UIScreen mainScreen].scale
+//#define dividingLineColor [UIColor colorWithWhite:0.05 alpha:0.3]  //  颜色值
+#define loadingBackGround [UIColor colorWithWhite:0.1 alpha:0.6]
+
+//#define APPKeyWindow [[UIApplication sharedApplication] keyWindow]//(([[[UIApplication sharedApplication] windows] count])?([[[UIApplication sharedApplication] windows] firstObject]):([[UIApplication sharedApplication] keyWindow]))
+
+#define WEAKSELF typeof(self) __weak weakSelf = self;
+
+#define ESWeak(var, weakVar) __weak __typeof(&*var) weakVar = var
+#define ESStrong_DoNotCheckNil(weakVar, _var) __typeof(&*weakVar) _var = weakVar
+#define ESStrong(weakVar, _var) ESStrong_DoNotCheckNil(weakVar, _var); if (!_var) return;
+
+#define ESWeak_(var) ESWeak(var, weak_##var);
+#define ESStrong_(var) ESStrong(weak_##var, _##var);
+
+/** defines a weak `self` named `__weakSelf` */
+#define ESWeakSelf      ESWeak(self, __weakSelf);
+/** defines a strong `self` named `_self` from `__weakSelf` */
+#define ESStrongSelf    ESStrong(__weakSelf, _self);
+
+//链接颜色
+#define kLinkAttributes     @{(__bridge NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:YES],(NSString *)kCTForegroundColorAttributeName : (__bridge id)kLinkAttriColor.CGColor}
+#define kLinkAttributesActive       @{(NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:YES],(NSString *)kCTForegroundColorAttributeName : (__bridge id)UIColorFromRGB(0x696969).CGColor}
+
+//   导航  文字   左右
+#define NavBarButtonItem(title,m) [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(m:)]
+//   导航 图片   左右
+#define NavBarButtonImage(Image,m) [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:Image] style:UIBarButtonItemStylePlain target:self action:@selector(m:)]
+
+// 导航自定义文字
+#define NavLeftBarButtonItem(title, m)\
+\
+UIButton *button = [UIButton buttonWithTitle:title titleColor:LBlackTintColor];\
+[button addTarget:self action:@selector(m:) forControlEvents:UIControlEventTouchUpInside];\
+button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;\
+self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+#define NavRightBarButtonItem(title, m)\
+\
+UIButton *button = [UIButton buttonWithTitle:title titleColor:LBlackTintColor];\
+[button addTarget:self action:@selector(m:) forControlEvents:UIControlEventTouchUpInside];\
+button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;\
+self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+#define kSoundOnOff @"SoundOnOff"
+#define kShockOnOff @"ShockOnOff"
+#define kSeatManagerNoti @"SeatManagerNoti"
+
+#define XFAppid @"59db23b6"
+
+#define adjustsScrollViewInsets_NO(scrollView, vc)\
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
+[scrollView performSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:") withObject:@(2)];\
+scrollView.scrollIndicatorInsets = scrollView.contentInset;\
+scrollView.estimatedRowHeight = 0;\
+scrollView.estimatedSectionHeaderHeight = 0;\
+scrollView.estimatedSectionFooterHeight = 0;\
+} else {\
+vc.automaticallyAdjustsScrollViewInsets = NO;\
+}\
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+#endif /* PrefixHeader_pch */
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
